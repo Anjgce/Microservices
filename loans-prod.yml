@@ -2,7 +2,7 @@ build:
   version: "1.0"
 
 loans:
-  message: "Welcome to PS Bank related loans prod APIs"
+  message: "Welcome to PS Bank related loans production APIs"
   contactDetails:
     name: "Shankar Kumar - Product Owner"
     email: "shankar@gmail.com"
