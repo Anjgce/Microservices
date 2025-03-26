@@ -5,7 +5,7 @@ accounts:
   message: "Welcome to PS Bank related accounts prod APIs"
   contactDetails:
     name: "Shankar Kumar - Product Owner"
-    email: {cipher}d8e3ae43999576159bcd38b42ecee30a4b43e1d4dd21e89e3a618ee5053fcd6f79eff2dd61d40314bdb312846c55cbc9
+    email: "{cipher}d8e3ae43999576159bcd38b42ecee30a4b43e1d4dd21e89e3a618ee5053fcd6f79eff2dd61d40314bdb312846c55cbc9"
 
   onCallSupport:
     - (555) 555-1236
