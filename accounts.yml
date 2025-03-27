@@ -2,7 +2,7 @@ build:
   version: "3.0"
 
 accounts:
-  message: "Welcome to PS Bank related accounts local APIs"
+  message: "Welcome to PS Bank related accounts localsystem APIs"
   contactDetails:
     name: "Anuj Kumar"
     email: "anuj@gmail.com"
