@@ -114,7 +114,7 @@
 				<version>3.4.5</version>
 				<configuration>
 					<to>
-						<image>anjgce/${project.artifactId}:s6</image>
+						<image>anjgce/${project.artifactId}:s7</image>
 					</to>
 				</configuration>
 			</plugin>
