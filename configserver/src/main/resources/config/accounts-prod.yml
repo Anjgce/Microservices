@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to PS Bank related accounts prod APIs"
+  contactDetails:
+    name: "Shankar Kumar - Product Owner"
+    email: "shankar@gmail.com"
+  onCallSupport:
+    - (555) 555-1236
+    - (555) 555-2347
