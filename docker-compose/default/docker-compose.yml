@@ -1,4 +1,28 @@
 services:
+  eurekaserver:
+    image: "anjgce/eurekaserver:s8"
+    container_name: eurekaserver-ms
+    ports:
+      - "8070:8070"
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    environment:
+      SPRING_APPLICATION_NAME: "eurekaserver"
+      EUREKA_INSTANCE_PREFERIPADDRESS: "false"
+      EUREKA_CLIENT_REGISTERWITHEUREKA: "false"
+      EUREKA_CLIENT_FETCHREGISTRY: "false"
+      EUREKA_SERVER_ENABLESELFPRESERVATION: "false"
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+    depends_on:
+      configserver:
+        condition: service_healthy
+
   rabbit:
     image: rabbitmq:4.0-management
     hostname: rabbitmq
@@ -16,7 +40,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "anjgce/configserver:s6"
+    image: "anjgce/configserver:s8"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -34,7 +58,7 @@ services:
       service: microservice-base-config
 
   accounts:
-    image: "anjgce/accounts:s6"
+    image: "anjgce/accounts:s8"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -43,12 +67,17 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "accounts"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://host.docker.internal:3307/accountsdb"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+      EUREKA_INSTANCE_PREFERIPADDRESS: "false"
     extends:
       file: common-config.yml
       service: microservice-configserver-config
 
   loans:
-    image: "anjgce/loans:s6"
+    image: "anjgce/loans:s8"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -57,12 +86,17 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "loans"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://host.docker.internal:3308/loansdb"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+      EUREKA_INSTANCE_PREFERIPADDRESS: "false"
     extends:
       file: common-config.yml
       service: microservice-configserver-config
 
   cards:
-    image: "anjgce/cards:s6"
+    image: "anjgce/cards:s8"
     container_name: cards-ms
     ports:
       - "9000:9000"
@@ -71,6 +105,11 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "cards"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://host.docker.internal:3309/cardsdb"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+      EUREKA_INSTANCE_PREFERIPADDRESS: "false"
     extends:
       file: common-config.yml
       service: microservice-configserver-config

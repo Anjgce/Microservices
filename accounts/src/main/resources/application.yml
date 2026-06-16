@@ -6,21 +6,27 @@ spring:
     name: "accounts"
   profiles:
     active: "prod"
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    driver-class-name: org.h2.Driver
+#    username: anuj
+#    password: ''
+#  h2:
+#    console:
+#      enabled: true
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: anuj
-    password: ''
-  h2:
-    console:
-      enabled: true
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/accountsdb
+    username: root
+    password: root
+
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
   config:
-    import: "optional:configserver:http://localhost:8071"
+    import: "optional:configserver:http://configserver:8071"
 
 management:
   endpoints:
@@ -38,18 +44,21 @@ eureka:
   instance:
     preferIpAddress: true
   client:
-    fetchRegistry: false
+    fetchRegistry: true
     registerWithEureka: true
     serviceUrl:
-      defaultZone: http://localhost:8070/eureka/
+      defaultZone: http://eurekaserver:8070/eureka/
 
 endpoints:
   shutdown:
     enabled: true
 
 
+build:
+  version: "0.0"
+
 info:
   app:
     name: "accounts"
     description: "PS Bank Accounts Application"
-    version: "1.0.0"
+  version: "1.0.0"

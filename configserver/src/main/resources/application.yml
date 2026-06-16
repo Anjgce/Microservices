@@ -2,15 +2,15 @@ spring:
   application:
     name: configserver
   profiles:
-#    active: native
+    #    active: native
     active: git
 
   cloud:
     config:
       server:
-#        native:
-#          search-locations: "classpath:/config"
-#          search-locations: "file:///C://Configuration//config"
+        #        native:
+        #          search-locations: "classpath:/config"
+        #          search-locations: "file:///C://Configuration//config"
         git:
           uri: "https://github.com/Anjgce/Microservices.git"
           default-label: main
@@ -44,4 +44,3 @@ encrypt:
 
 server:
   port: 8071
-
